@@ -1,0 +1,10 @@
+.DS_Store
+*.scss
+*.css
+*.local
+
+node_modules/
+build/
+coverage/
+
+jest.config.js
