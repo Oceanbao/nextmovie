@@ -7,9 +7,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  **/
 const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
-  // Styled Component upgrade to SWC compiler
-  // ssr and displayName are configured by default
-  styledComponents: true,
   swcMinify: true,
 })
 module.exports = nextConfig
