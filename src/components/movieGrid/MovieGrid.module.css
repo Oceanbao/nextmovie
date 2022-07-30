@@ -1,0 +1,21 @@
+.movieGrid {
+  @apply grid grid-cols-basic md:grid-cols-large gap-[20px] mb-[3rem];
+}
+
+.loadMore {
+  text-align: center;
+}
+
+.search {
+  @apply relative w-full;
+  max-width: 500px;
+}
+
+.search input {
+  width: 100%;
+  padding-right: 8rem;
+}
+
+.search button {
+  @apply absolute right-[1px] top-[1px] md:right-0 md:top-[2px];
+}

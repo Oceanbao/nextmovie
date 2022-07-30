@@ -1,0 +1,13 @@
+.pageHeader {
+  @apply text-center mb-[2rem] relative bg-top bg-cover bg-no-repeat;
+  padding: var(--header-height) 0 2rem;
+}
+
+.pageHeader::after {
+  @apply content-[""] absolute bottom-0 left-0 w-full h-[100px];
+  background-image: linear-gradient(to top, --var(body-bg), rgba(0, 0, 0, 0));
+}
+
+.pageHeader h2 {
+  @apply relative z-[99];
+}

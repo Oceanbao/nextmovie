@@ -1,0 +1,79 @@
+.heroSlide {
+  @apply mb-12;
+}
+
+.heroSlideItem {
+  @apply relative w-full bg-cover bg-center bg-no-repeat py-[9rem] px-0;
+}
+
+.heroSlideItem::before {
+  @apply content-[""] absolute top-0 left-0 w-full h-full overlay;
+}
+
+.heroSlideItem::after {
+  @apply content-[""] absolute bottom-0 left-0 w-full h-full;
+  background-image: linear-gradient(to top, #0f0f0f, rgba(0, 0, 0, 0));
+}
+
+.heroSlideContent {
+  @apply flex justify-center items-center relative;
+}
+
+.heroSlideInfo {
+  @apply w-[55%] py-0 px-[3rem] relative md:w-full;
+}
+
+.heroSlideInfo > * ~ * {
+  margin-top: 3rem;
+}
+
+.title {
+  @apply text-[5rem] font-bold leading-none md:text-[4rem];
+}
+
+.overview {
+  @apply font-bold;
+}
+
+.btns > * ~ * {
+  margin-left: 1rem;
+}
+
+.btns,
+.title,
+.overview {
+  @apply opacity-0 translate-y-[-100px];
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.heroSlidePoster {
+  @apply flex justify-center items-start;
+  flex: 1;
+}
+
+.heroSlidePoster img {
+  @apply w-[400px] scale-0 md:hidden custom-shadow;
+  transition: transform 0.7s ease;
+  border-radius: var(--border-radius);
+}
+
+.heroSlideItem.active > .heroSlideContent > .heroSlidePoster img {
+  transform: scale(1);
+}
+
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .btns,
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .title,
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .overview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .title {
+  transition-delay: 0.3s, 0.3s;
+}
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .overview {
+  transition-delay: 0.6s, 0.6s;
+}
+.heroSlideItem.active > .heroSlideContent > .heroSlideInfo .btns {
+  transition-delay: 0.9s, 0.9s;
+}

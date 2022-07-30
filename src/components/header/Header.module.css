@@ -1,0 +1,45 @@
+.logo {
+  @apply text-[2.5rem] font-semibold flex justify-center items-center;
+}
+
+.logo span {
+  @apply w-[30px] mr-0 md:mr-[10px] md:w-[50px] !important;
+}
+
+.header {
+  @apply h-[var(--header-height)] fixed top-0 left-0 w-full z-[99];
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+.header.rollup {
+  height: var(--header-shrink-height);
+  background-color: var(--body-bg);
+}
+
+.wrap {
+  @apply flex justify-center md:justify-between items-center h-full px-[2rem] py-0;
+}
+
+.nav {
+  @apply fixed bottom-0 left-0 h-[5rem] w-full px-[2rem] py-0 flex justify-between items-center bg-[color:var(--body-bg)] custom-shadow 
+  md:justify-start md:relative md:bottom-auto md:left-auto md:w-auto md:bg-[color:unset];
+}
+
+.nav > * ~ * {
+  @apply ml-0 md:ml-[2rem];
+}
+
+.list {
+  @apply px-0 py-[5px] font-bold relative text-[1.5rem];
+}
+
+.list::after {
+  @apply content-[""] absolute bottom-0 left-[50%] translate-x-[-50%] w-0 h-[2px];
+  transition: width 0.5s ease;
+  background-color: var(--main-color);
+}
+
+.list.active::after,
+.list:hover::after {
+  width: 100%;
+}

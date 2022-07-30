@@ -1,0 +1,7 @@
+.input {
+  @apply border-0 px-[1.5rem] py-[0.5rem] text-[1rem];
+  background-color: var(--black);
+  border-radius: var(--border-radius);
+  color: var(--txt-color);
+  font-family: var(--font-family);
+}

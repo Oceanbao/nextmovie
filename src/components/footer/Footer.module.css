@@ -1,0 +1,23 @@
+.footer {
+  @apply relative px-[2rem] py-[6rem] bg-top bg-cover bg-no-repeat;
+}
+
+.content {
+  max-width: 1000px;
+}
+
+.contentLogo {
+  @apply flex justify-center items-center mb-[3rem];
+}
+
+.contentMenus {
+  @apply grid grid-cols-2 md:grid-cols-3;
+}
+
+.menu {
+  @apply flex justify-start items-start flex-col mt-[1rem] text-[1.5rem] font-semibold;
+}
+
+.menu > * ~ * {
+  margin-top: 1rem;
+}

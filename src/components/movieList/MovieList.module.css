@@ -1,0 +1,5 @@
+.movieList {
+  .swiper-slide {
+    @apply w-[40%] md:w-[30%] lg:w-[15%];
+  }
+}

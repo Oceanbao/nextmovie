@@ -1,7 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap');
+
 @tailwind base;
-@import './base.css';
-
 @tailwind components;
-@import './components.css';
-
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --body-bg: #0f0f0f;
+    --main-color: #ff0000;
+    --txt-color: #fff;
+    --white: #fff;
+    --black: #000;
+    --header-height: 8rem;
+    --header-shrink-height: 5rem;
+    --border-radius: 30px;
+    --font-family: 'Montserrat', sans-serif;
+  }
+
+  html {
+    @apply text-[60%] md:text-[80%] lg:text-[100%];
+  }
+
+  body {
+    @apply mb-12 md:mb-0;
+    font-family: var(--font-family);
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: var(--body-gb);
+    color: var(--txt-color);
+  }
+
+  a {
+    @apply hover:text-[color:var(--main-color)];
+    text-decoration: none;
+    color: unset;
+  }
+
+  button,
+  input {
+    outline: 0;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  iframe {
+    border: 0;
+  }
+}

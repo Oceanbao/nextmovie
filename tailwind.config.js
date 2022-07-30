@@ -1,8 +1,38 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   safelist: ['outline-none'],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.container': {
+          'max-width': '1660px',
+          margin: 'auto',
+        },
+        '.custom-shadow': {
+          'box-shadow': 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+        },
+        '.section': {
+          padding: '0 2rem',
+        },
+        '.section-header': {
+          display: 'flex',
+          'justify-content': 'space-between',
+          'align-items': 'center',
+        },
+        '.overlay': {
+          'background-color': 'rgba(0, 0, 0, 0.6)',
+        },
+      })
+    }),
+  ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        basic: 'repeat(auto-fill, minmax(150px, 1fr))',
+        large: 'repeat(auto-fill, minmax(200px, 1fr))',
+      },
       maxWidth: {
         '8xl': '1920px',
       },
