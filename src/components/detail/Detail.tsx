@@ -30,7 +30,7 @@ const Detail = (props: Props) => {
   const handleBgImg = (item: TDetailsMovie | TDetailsTv) => {
     if (item.backdrop_path) return apiConfig.originalImage(item.backdrop_path)
     if (item.poster_path) return apiConfig.originalImage(item.poster_path)
-    return '/demo_poster.jpg'
+    return '/na.png'
   }
 
   const getTitle = (item: TDetailsMovie | TDetailsTv) => {

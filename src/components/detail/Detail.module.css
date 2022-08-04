@@ -46,7 +46,7 @@
 }
 
 .genre {
-  @apply flex justify-center items-center;
+  @apply flex justify-start items-center;
 }
 
 .genre > * ~ * {

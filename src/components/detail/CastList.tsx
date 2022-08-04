@@ -28,7 +28,7 @@ const CastList = (props: Props) => {
 
   const handleProfilePath = (item: TCredit) => {
     if (item.profile_path) return apiConfig.w500Image(item.profile_path)
-    return '/demo_poster.jpg'
+    return '/na.png'
   }
 
   return (
@@ -43,7 +43,7 @@ const CastList = (props: Props) => {
       {casts.map((item, i) => (
         <div key={i} className="item">
           <div
-            className="img pt-[160px] mb-[0.5rem] bg-cover"
+            className="img pt-[160px] mb-[0.5rem] bg-cover bg-center"
             style={{ backgroundImage: `url(${handleProfilePath(item)})` }}
           ></div>
           <p className="name text-[0.8rem]">{item.name}</p>

@@ -1,25 +1,14 @@
 import cn from 'clsx'
-import { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import s from './Modal.module.css'
 
 type ModalProps = {
-  id: string
   active: boolean
   children: React.ReactNode
 }
 
 export default function Modal(props: ModalProps) {
-  const [active, setActive] = useState(false)
-
-  useEffect(() => {
-    setActive(props.active)
-  }, [props.active])
-
-  return (
-    <div id={props.id} className={cn(s.modal, { [s.active]: active })}>
-      {props.children}
-    </div>
-  )
+  return <div className={cn(s.modal, { [s.active]: props.active })}>{props.children}</div>
 }
 
 type ModalContentProps = {
