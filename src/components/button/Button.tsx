@@ -2,6 +2,8 @@ import cn from 'clsx'
 import s from './Button.module.css'
 
 type ButtonProps = {
+  outline?: boolean
+  small?: boolean
   className?: string
   onClick?: () => void
   children: React.ReactNode
@@ -9,7 +11,10 @@ type ButtonProps = {
 
 export default function Button(props: ButtonProps) {
   return (
-    <button className={cn(s.btn, props.className && s[props.className])} onClick={() => props.onClick?.()}>
+    <button
+      className={cn(s.btn, { [s.btnOutline]: props.outline }, { [s.small]: props.small })}
+      onClick={() => props.onClick?.()}
+    >
       {props.children}
     </button>
   )
@@ -17,7 +22,7 @@ export default function Button(props: ButtonProps) {
 
 export const OutlineButton = (props: ButtonProps) => {
   return (
-    <Button className={cn(s.btnOutline, props.className && s[props.className])} onClick={() => props.onClick?.()}>
+    <Button outline small={props.small} onClick={() => props.onClick?.()}>
       {props.children}
     </Button>
   )

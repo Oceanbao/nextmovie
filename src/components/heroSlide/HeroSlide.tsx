@@ -11,7 +11,7 @@ import 'swiper/css/autoplay'
 import Button, { OutlineButton } from '@components/button'
 import Modal, { ModalContent } from '@components/modal'
 
-import tmdbApi, { category, movieType, TItem, TVideo } from '@lib/tmdbApi'
+import tmdbApi, { Category, TCategory, MovieType, TVideo, TMovieType, TTvType, TItemMovie, TItemTv } from '@lib/tmdbApi'
 import apiConfig from '@lib/apiConfig'
 
 export default function HeroSlide() {
@@ -21,18 +21,18 @@ export default function HeroSlide() {
     const getMovies = async () => {
       const params = { page: 1 }
       try {
-        const response = await tmdbApi.getMoviesList(movieType.popular as keyof typeof movieType, { params })
+        const response = await tmdbApi.getMoviesList(MovieType.popular as TMovieType, { params })
         if (response.results) {
           console.log(response)
           setMovieItems(response.results.slice(1, 4))
-          localStorage.setItem(movieType.popular, JSON.stringify(response.results))
+          localStorage.setItem(MovieType.popular, JSON.stringify(response.results))
         }
       } catch {
         console.log('error')
       }
     }
 
-    const stored = localStorage.getItem(movieType.popular)
+    const stored = localStorage.getItem(MovieType.popular)
     if (stored) {
       const storedDecoded = JSON.parse(stored)
       setMovieItems(storedDecoded)
@@ -43,7 +43,7 @@ export default function HeroSlide() {
 
   return (
     <div className={cn(s.heroSlide)}>
-      <Swiper modules={[Autoplay]} grabCursor={true} spaceBetween={0} slidesPerView={1}>
+      <Swiper modules={[Autoplay]} grabCursor={true} spaceBetween={0} slidesPerView={1} autoplay={{ delay: 6000 }}>
         {movieItems.map((item, i) => (
           <SwiperSlide key={i}>
             {({ isActive }) => <HeroSlideItem item={item} className={cn({ [s.active]: isActive })} />}
@@ -58,7 +58,7 @@ export default function HeroSlide() {
 }
 
 interface IHeroSlideItem {
-  item: TItem
+  item: TItemMovie
   className: string
 }
 
@@ -66,26 +66,26 @@ const HeroSlideItem = (props: IHeroSlideItem) => {
   const router = useRouter()
 
   const item = props.item
-  // const background = apiConfig.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path ?? '')
-  const background = '/demo_backdrop.jpg'
+  const background = apiConfig.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path ?? '')
+  // const background = '/demo_backdrop.jpg'
 
   const setModalActive = async () => {
     const modal = document.querySelector(`#modal_${item.id}`)
-    const videos = await tmdbApi.getVideos(category.movie as keyof typeof category, item.id)
+    const videos = await tmdbApi.getVideos(Category.movie as TCategory, item.id ?? -1)
 
     if (videos.results && videos.results.length > 0) {
       const videoSrc = `https://www.youtube/com/embed/${videos.results[0].key}`
-      modal!.querySelector(`.${cn(s.modalContent)} > iframe`)!.setAttribute('src', videoSrc)
+      modal!.querySelector('iframe')!.setAttribute('src', videoSrc)
     } else {
-      modal!.querySelector(`.${cn(s.modalContent)}`)!.innerHTML = 'No trailer'
+      console.log('No trailer')
+      // modal!.querySelector(`.${cn(s.modalContent)}`)!.innerHTML = 'No trailer'
     }
-
-    modal?.classList.toggle('active')
+    modal?.toggleAttribute('active')
   }
 
   return (
     <div className={cn(s.heroSlideItem, props.className)} style={{ backgroundImage: `url(${background})` }}>
-      <div className={cn(s.heroSlideContent, 'container')}>
+      <div className={cn(s.heroSlideContent, 'box')}>
         <div className={cn(s.heroSlideInfo)}>
           <h2 className={cn(s.title)}>{item.title}</h2>
           <div className={cn(s.overview)}>{item.overview}</div>
@@ -95,8 +95,8 @@ const HeroSlideItem = (props: IHeroSlideItem) => {
           </div>
         </div>
         <div className={cn(s.heroSlidePoster)}>
-          {/* <img src={apiConfig.w500Image(item.poster_path ?? '')} alt="" /> */}
-          <img src="/demo_backdrop.jpg" alt="" />
+          <img src={apiConfig.w500Image(item.poster_path ?? '')} alt="" />
+          {/* <img src="/demo_backdrop.jpg" alt="" /> */}
         </div>
       </div>
     </div>

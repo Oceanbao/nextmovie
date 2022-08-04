@@ -32,7 +32,7 @@ export function ModalContent(props: ModalContentProps) {
 
   const closeModal = () => {
     const elem = contentRef.current!.parentNode as HTMLElement
-    elem.classList.remove('active')
+    elem.classList.remove(cn(s.active))
     if (props.onClose) props.onClose()
   }
 

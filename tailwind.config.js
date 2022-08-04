@@ -6,23 +6,23 @@ module.exports = {
   plugins: [
     plugin(function ({ addUtilities }) {
       addUtilities({
-        '.container': {
-          'max-width': '1660px',
+        '.box': {
+          maxWidth: '1660px',
           margin: 'auto',
         },
         '.custom-shadow': {
-          'box-shadow': 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+          boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
         },
         '.section': {
           padding: '0 2rem',
         },
         '.section-header': {
           display: 'flex',
-          'justify-content': 'space-between',
-          'align-items': 'center',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         },
         '.overlay': {
-          'background-color': 'rgba(0, 0, 0, 0.6)',
+          backgroundColor: 'rgba(0, 0, 0, 0.6)',
         },
       })
     }),

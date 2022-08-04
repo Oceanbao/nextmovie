@@ -7,19 +7,23 @@ import MovieCard from '@components/movieCard'
 import Button, { OutlineButton } from '@components/button'
 import Input from '@components/input'
 
-import tmdbApi, { category, movieType, tvType } from '@lib/tmdbApi'
+import tmdbApi, { Category, TCategory, TMovieType, TTvType, MovieType, TvType } from '@lib/tmdbApi'
 
 interface MovieGridProps {
-  category: string
+  category: TCategory
 }
 
 export default function MovieGrid(props: MovieGridProps) {
+  console.log('--------- RENDER -----------')
+
   const [items, setItems] = useState([{}])
 
   const [page, setPage] = useState(1)
   const [totalPage, setTotalPage] = useState(0)
 
-  const keyword = useRouter().query.keyword as string
+  const route = useRouter()
+  const keyword = route.query.keyword as string
+  console.log('keyword: ', keyword)
 
   useEffect(() => {
     const getList = async () => {
@@ -27,34 +31,55 @@ export default function MovieGrid(props: MovieGridProps) {
       if (keyword === undefined) {
         const params = {}
         switch (props.category) {
-          case category.movie:
-            response = await tmdbApi.getMoviesList(movieType.upcoming as keyof typeof movieType, { params })
+          case Category.movie:
+            response = await tmdbApi.getMoviesList(MovieType.upcoming as TMovieType, { params })
             break
           default:
-            response = await tmdbApi.getTvList(tvType.popular as keyof typeof tvType, { params })
+            response = await tmdbApi.getTvList(TvType.popular as TTvType, { params })
         }
       } else {
         const params = {
           query: keyword,
         }
-        response = await tmdbApi.search(props.category as keyof typeof category, { params })
+        response = await tmdbApi.search(props.category, { params })
+        console.log('fetched-response: ', response)
       }
+
+      const dataStored = { results: response.results, totalPage: response.total_pages }
+      if (keyword === undefined) {
+        localStorage.setItem(props.category, JSON.stringify(dataStored))
+      } else {
+        localStorage.setItem(keyword, JSON.stringify(dataStored))
+      }
+      console.log('fetched')
+
       setItems(response.results ?? [])
       setTotalPage(response.total_pages ?? 0)
-
-      console.log('setting', response.results)
-      localStorage.setItem(props.category, JSON.stringify(response.results))
     }
 
-    const stored = localStorage.getItem(props.category)
-    if (stored) {
-      const storedDecoded = JSON.parse(stored)
-      setItems(storedDecoded)
-      setTotalPage(13000)
+    if (keyword === undefined) {
+      const stored = localStorage.getItem(props.category)
+      if (stored) {
+        const { results, totalPage } = JSON.parse(stored)
+        console.log('setItem-cate-stored: ', results)
+        setItems(results)
+        setTotalPage(totalPage)
+      } else {
+        console.log('getList')
+        getList()
+      }
     } else {
-      getList()
+      const stored = localStorage.getItem(keyword)
+      if (stored) {
+        const { results, totalPage } = JSON.parse(stored)
+        console.log('setItem-search-stored: ', results)
+        setItems(results)
+        setTotalPage(totalPage)
+      } else {
+        getList()
+      }
     }
-  }, [props.category, keyword])
+  }, [keyword, props.category])
 
   const loadMore = async () => {
     let response = null
@@ -63,22 +88,24 @@ export default function MovieGrid(props: MovieGridProps) {
         page: page + 1,
       }
       switch (props.category) {
-        case category.movie:
-          response = await tmdbApi.getMoviesList(movieType.upcoming as keyof typeof movieType, { params })
+        case Category.movie:
+          response = await tmdbApi.getMoviesList(MovieType.upcoming as TMovieType, { params })
           break
         default:
-          response = await tmdbApi.getTvList(tvType.popular as keyof typeof tvType, { params })
+          response = await tmdbApi.getTvList(TvType.popular as TTvType, { params })
       }
     } else {
       const params = {
         page: page + 1,
         query: keyword,
       }
-      response = await tmdbApi.search(props.category as keyof typeof category, { params })
+      response = await tmdbApi.search(props.category, { params })
     }
     setItems([...items, ...(response.results ?? [])])
     setPage(page + 1)
   }
+
+  console.log('items: ', items)
 
   return (
     <>
@@ -87,12 +114,12 @@ export default function MovieGrid(props: MovieGridProps) {
       </div>
       <div className={cn(s.movieGrid)}>
         {items.map((item, i) => (
-          <MovieCard category={props.category as keyof typeof category} item={item} key={i} />
+          <MovieCard category={props.category} item={item} key={i} />
         ))}
       </div>
       {page < totalPage ? (
         <div className={cn(s.loadMore)}>
-          <OutlineButton className="small" onClick={loadMore}>
+          <OutlineButton small onClick={loadMore}>
             Load more
           </OutlineButton>
         </div>
@@ -102,7 +129,7 @@ export default function MovieGrid(props: MovieGridProps) {
 }
 
 interface MovieSearchProps {
-  category: string
+  category: TCategory
   keyword?: string
 }
 
@@ -113,7 +140,7 @@ const MovieSearch = (props: MovieSearchProps) => {
 
   const goToSearch = useCallback(() => {
     if (keyword.trim().length > 0) {
-      router.push(`/${category[props.category as keyof typeof category]}/search/${keyword}`)
+      router.push(`/${Category[props.category]}/search/${keyword}`)
     }
   }, [keyword, props.category])
 
@@ -131,9 +158,9 @@ const MovieSearch = (props: MovieSearchProps) => {
   }, [keyword, goToSearch])
 
   return (
-    <div className="movie-search">
+    <div className={cn(s.search)}>
       <Input type="text" placeholder="Enter keyword" value={keyword} onChange={e => setKeyword(e.target.value)} />
-      <Button className="small" onClick={goToSearch}>
+      <Button small onClick={goToSearch}>
         Search
       </Button>
     </div>

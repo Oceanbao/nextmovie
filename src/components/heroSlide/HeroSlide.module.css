@@ -3,7 +3,7 @@
 }
 
 .heroSlideItem {
-  @apply relative w-full bg-cover bg-center bg-no-repeat py-[9rem] px-0;
+  @apply relative flex bg-cover bg-center bg-no-repeat py-[9rem] px-0;
 }
 
 .heroSlideItem::before {
@@ -11,7 +11,7 @@
 }
 
 .heroSlideItem::after {
-  @apply content-[""] absolute bottom-0 left-0 w-full h-full;
+  @apply content-[""] absolute bottom-0 left-0 w-full h-[100px];
   background-image: linear-gradient(to top, #0f0f0f, rgba(0, 0, 0, 0));
 }
 
@@ -20,7 +20,7 @@
 }
 
 .heroSlideInfo {
-  @apply w-[55%] py-0 px-[3rem] relative md:w-full;
+  @apply w-full py-0 px-[3rem] relative md:w-[55%];
 }
 
 .heroSlideInfo > * ~ * {
@@ -28,7 +28,7 @@
 }
 
 .title {
-  @apply text-[5rem] font-bold leading-none md:text-[4rem];
+  @apply text-[4rem] font-bold leading-none md:text-[5rem];
 }
 
 .overview {
@@ -47,12 +47,12 @@
 }
 
 .heroSlidePoster {
-  @apply flex justify-center items-start;
-  flex: 1;
+  @apply relative hidden flex justify-center items-start md:block;
 }
 
 .heroSlidePoster img {
-  @apply w-[400px] scale-0 md:hidden custom-shadow;
+  @apply w-[400px] custom-shadow;
+  transform: scale(0);
   transition: transform 0.7s ease;
   border-radius: var(--border-radius);
 }

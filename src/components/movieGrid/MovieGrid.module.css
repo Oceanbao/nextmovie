@@ -7,15 +7,13 @@
 }
 
 .search {
-  @apply relative w-full;
-  max-width: 500px;
+  @apply flex w-full md:w-[50%] m-[auto] justify-between items-center;
 }
 
 .search input {
-  width: 100%;
-  padding-right: 8rem;
+  @apply bg-[color:var(--main-bg)] w-[80%] border-[color:var(--main-color)] border border-solid;
 }
 
 .search button {
-  @apply absolute right-[1px] top-[1px] md:right-0 md:top-[2px];
+  @apply ml-[50px];
 }

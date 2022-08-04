@@ -3,7 +3,7 @@
 }
 
 .logo span {
-  @apply w-[30px] mr-0 md:mr-[10px] md:w-[50px] !important;
+  @apply w-[30px] mr-[5px] md:mr-[10px] md:w-[50px] !important;
 }
 
 .header {
@@ -22,7 +22,7 @@
 
 .nav {
   @apply fixed bottom-0 left-0 h-[5rem] w-full px-[2rem] py-0 flex justify-between items-center bg-[color:var(--body-bg)] custom-shadow 
-  md:justify-start md:relative md:bottom-auto md:left-auto md:w-auto md:bg-[color:unset];
+  md:justify-start md:relative md:bottom-auto md:left-auto md:w-auto md:bg-[transparent] md:shadow-none;
 }
 
 .nav > * ~ * {

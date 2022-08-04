@@ -4,60 +4,60 @@ import { OutlineButton } from '@components/button'
 import HeroSlide from '@components/heroSlide'
 import MovieList from '@components/movieList'
 
-import { category, movieType, tvType } from '@lib/tmdbApi'
+import { Category, MovieType, TCategory, TvType } from '@lib/tmdbApi'
 
 export default function Home() {
   return (
     <>
       <HeroSlide />
 
-      <div className="container">
+      <div className="box">
         <div className="section mb-12">
           <div className="section-header mb-8">
-            <h2>Trending Movies</h2>
+            <h2 className="text-xl font-bold">Trending Movies</h2>
             <Link href="/movie" passHref>
               <a>
-                <OutlineButton className="small">View more</OutlineButton>
+                <OutlineButton small>View more</OutlineButton>
               </a>
             </Link>
           </div>
-          <MovieList category={category.movie} type={movieType.popular} />
+          <MovieList category={Category.movie as TCategory} type={MovieType.popular} />
         </div>
 
         <div className="section mb-12">
           <div className="section-header mb-8">
-            <h2>Top Rated Movies</h2>
+            <h2 className="text-xl font-bold">Top Rated Movies</h2>
             <Link href="/movie" passHref>
               <a>
-                <OutlineButton className="small">View more</OutlineButton>
+                <OutlineButton small>View more</OutlineButton>
               </a>
             </Link>
           </div>
-          <MovieList category={category.movie} type={movieType.top_rated} />
+          <MovieList category={Category.movie as TCategory} type={MovieType.top_rated} />
         </div>
 
         <div className="section mb-12">
           <div className="section-header mb-8">
-            <h2>Trending TV</h2>
+            <h2 className="text-xl font-bold">Trending TV</h2>
             <Link href="/tv" passHref>
               <a>
-                <OutlineButton className="small">View more</OutlineButton>
+                <OutlineButton small>View more</OutlineButton>
               </a>
             </Link>
           </div>
-          <MovieList category={category.tv} type={tvType.popular} />
+          <MovieList category={Category.tv as TCategory} type={TvType.popular} />
         </div>
 
         <div className="section mb-12">
           <div className="section-header mb-8">
-            <h2>Top Rated TV</h2>
+            <h2 className="text-xl font-bold">Top Rated TV</h2>
             <Link href="/tv" passHref>
               <a>
-                <OutlineButton className="small">View more</OutlineButton>
+                <OutlineButton small>View more</OutlineButton>
               </a>
             </Link>
           </div>
-          <MovieList category={category.tv} type={tvType.top_rated} />
+          <MovieList category={Category.tv as TCategory} type={TvType.top_rated} />
         </div>
       </div>
     </>

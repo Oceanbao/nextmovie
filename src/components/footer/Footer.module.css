@@ -21,3 +21,11 @@
 .menu > * ~ * {
   margin-top: 1rem;
 }
+
+.logo {
+  @apply text-[2.5rem] font-semibold flex justify-center items-center;
+}
+
+.logo span {
+  @apply w-[30px] mr-[5px] md:mr-[10px] md:w-[50px] !important;
+}

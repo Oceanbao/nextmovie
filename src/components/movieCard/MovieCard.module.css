@@ -3,19 +3,22 @@
   border-radius: var(--border-radius);
 }
 
-.movieCard .btn {
+.movieCard::before {
+  @apply content-[""] absolute inset-0 bg-[#000] opacity-0;
+  transition: opacity 0.3s ease;
+  border-radius: var(--border-radius);
+}
+
+.movieCard:hover::before {
+  opacity: 0.8;
+}
+
+.movieCard .btnBox {
   @apply absolute top-[50%] left-[50%];
   transform: translate(-50%, -50%) scale(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.movieCard::before {
-  @apply content-[""] absolute inset-0 bg-[#000] opacity-0
-  hover:opacity-[0.8];
-  transition: opacity 0.3s ease;
-  border-radius: var(--border-radius);
-}
-
-.movieCard:hover .btn {
+.movieCard:hover .btnBox {
   transform: translate(-50%, -50%) scale(1);
 }

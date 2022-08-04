@@ -1,12 +1,12 @@
 import cn from 'clsx'
 import s from './PageHeader.module.css'
 
-import bg from '@assets/footer-bg.jpg'
+const bg = '/footer-bg.jpg'
 
 export default function PageHeader({ children }: { children: React.ReactNode }) {
   return (
     <div className={cn(s.pageHeader)} style={{ backgroundImage: `url(${bg})` }}>
-      <h2>{children}</h2>
+      <h2 className="text-2xl font-bold">{children}</h2>
     </div>
   )
 }

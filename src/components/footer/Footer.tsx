@@ -3,13 +3,13 @@ import cn from 'clsx'
 import Link from 'next/link'
 import s from './Footer.module.css'
 
-import bg from '@assets/footer-bg.jpg'
 import logo from '@assets/tmovie.png'
+const bg = '/footer-bg.jpg'
 
 export default function Footer() {
   return (
-    <div className={cn(s.footer)} style={{ backgroundImage: `url(${bg}))` }}>
-      <div className={cn(s.content, 'container')}>
+    <div className={cn(s.footer)} style={{ backgroundImage: `url(${bg})` }}>
+      <div className={cn(s.content, 'box')}>
         <div className={cn(s.contentLogo)}>
           <div className={cn(s.logo)}>
             <Image src={logo} alt="" />

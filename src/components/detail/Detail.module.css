@@ -1,0 +1,63 @@
+.banner {
+  @apply h-[50vh] relative bg-center bg-cover bg-no-repeat;
+}
+
+.banner::before {
+  @apply content-[""] absolute top-0 left-0 w-full h-full overlay;
+}
+
+.banner::after {
+  @apply content-[""] absolute bottom-0 left-0 w-full h-[100px];
+  background-image: linear-gradient(to top, var(--body-bg), rgba(0, 0, 0, 0));
+}
+
+.content {
+  @apply flex justify-start items-start ml-[auto] mr-[auto] mt-[-200px] relative py-0 px-[2rem];
+  max-width: 1260px;
+}
+
+.poster {
+  @apply hidden md:block;
+  flex: 1;
+}
+
+.posterImg {
+  @apply bg-center bg-cover bg-no-repeat pt-[165%];
+  border-radius: var(--border-radius);
+}
+
+.info {
+  @apply w-full md:w-[70%] pl-0 md:pl-[2rem] relative;
+}
+
+.info > * ~ * {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.overview {
+  font-weight: 500;
+}
+
+.genre {
+  @apply flex justify-center items-center;
+}
+
+.genre > * ~ * {
+  margin-left: 0.5rem;
+}
+
+.genreItem {
+  padding: 0.5rem 1.5rem;
+  border: 2px solid var(--white);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: var(--body-bg);
+}

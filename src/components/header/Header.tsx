@@ -50,7 +50,7 @@ export default function Header() {
 
   return (
     <div ref={headerRef} className={cn(s.header)}>
-      <div className={cn('container', s.wrap)}>
+      <div className={cn('box', s.wrap)}>
         <div className={cn(s.logo)}>
           <Image src={logo} alt="" />
           <Link href="/">
